@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:background="@drawable/custom_bg_"
+    tools:context="com.startup.hezare.startup.HomeActivity">
+
+    <RelativeLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBarLayout">
+
+        <ImageView
+            android:id="@+id/title_img"
+            android:background="@drawable/icon"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/layout_background"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/layout_background"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/customized_edittext_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/btn_background"
+                android:gravity="center_vertical|center_horizontal"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+
+                <Button
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#17bf7c"
+                    android:padding="10dp"
+                    android:background="@drawable/laybg"
+                    android:text="عکس جدید"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_capture"
+                    android:drawableTop="@drawable/camera48"/>
+                <Button
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#17bf7c"
+                    android:padding="10dp"
+                    android:background="@drawable/laybg"
+                    android:text=" گالری"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_choose_from_gallery"
+                    android:drawableTop="@drawable/gallery_select"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_guide"
+                android:textSize="14dp"
+                android:text="جهت سفارش، نسخه خود را ارسال کنید"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/btn_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottomBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <!--<com.roughike.bottombar.BottomBar
+            android:id="@+id/bottomBarhome"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            app:bb_activeTabColor="#0cb7a4"
+            app:bb_behavior="iconsOnly"
+            app:bb_tabXmlResource="@xml/bottombar_tabs" />-->
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:itemTextColor="@drawable/btn_nav_selector"
+            app:itemIconTint="@drawable/btn_nav_selector"
+            app:menu="@menu/bottombar_tabs1" />
+    </LinearLayout>
+
+
+</RelativeLayout>

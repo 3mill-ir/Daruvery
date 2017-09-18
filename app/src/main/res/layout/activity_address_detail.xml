@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:weightSum="3"
+    tools:context="com.startup.hezare.startup.MapsActivity">
+
+    <LinearLayout
+        android:id="@+id/map_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:context="com.startup.hezare.startup.MapsActivity">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:uiZoomControls="true"
+            tools:context="com.startup.hezare.startup.Address_Detail_Activity" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Address_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:isScrollContainer="true"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="3.5"
+        tools:context="com.startup.hezare.startup.MapsActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="center_horizontal|center_vertical"
+            android:isScrollContainer="true">
+
+            <TextView
+                android:id="@+id/guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="جهت ارسال درخواست خود به آدرس جدید نقشه را لمس کنید"
+                android:textColor="#00BCD4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="right">
+
+            <EditText
+                android:id="@+id/new_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:drawablePadding="2dp"
+                android:drawableRight="@drawable/ic_person_pin_circle_black_24dp"
+                android:hint="آدرس دقیق خود را وارد کنید"
+                android:inputType="textCapWords|textNoSuggestions"
+                android:maxLength="80"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="right">
+
+            <RadioGroup
+                android:id="@+id/radio_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <RadioButton
+                    android:id="@+id/current_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ارسال به آدرس من" />
+
+                <RadioButton
+                    android:id="@+id/new_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ارسال به آدرس جدید" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="20dp">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_send_request"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="ارسال درخواست"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:itemIconTint="@drawable/btn_nav_selector"
+        app:itemTextColor="@drawable/btn_nav_selector"
+        app:menu="@menu/bottombar_tabs1" />
+
+</LinearLayout>

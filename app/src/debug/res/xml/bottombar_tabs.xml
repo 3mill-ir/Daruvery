@@ -1,0 +1,22 @@
+<tabs>
+    <tab
+        id="@+id/tab_map"
+        icon="@drawable/ic_map_black_40dp"
+        inActiveColor="#6a7067" />
+    <tab
+        id="@+id/tab_list"
+        icon="@drawable/ic_history_black_40dp"
+        inActiveColor="#6a7067" />
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home_black_40dp"
+        inActiveColor="#6a7067" />
+    <tab
+        id="@+id/tab_share"
+        icon="@drawable/ic_share_black_40dp"
+        inActiveColor="#6a7067"/>
+    <tab
+        id="@+id/tab_about"
+        icon="@drawable/ic_more_horiz_black_40dp"
+        inActiveColor="#6a7067" />
+</tabs>
