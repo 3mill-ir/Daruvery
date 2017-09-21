@@ -1,18 +1,14 @@
 package com.startup.hezare.startup;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.annotation.IdRes;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
@@ -40,13 +36,9 @@ public class RulesActivity extends AppCompatActivity {
         TextView rules_title=(TextView)findViewById(R.id.title_rule);
         TextView rules_text=(TextView)findViewById(R.id.text_rule);
 
-
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
-        rules_title.setTypeface(BHoma);
+        rules_title.setTypeface(App.BHoma);
         rules_text.setText(rules);
-        rules_text.setTypeface(BYekan);
+        rules_text.setTypeface(App.BYekan);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);

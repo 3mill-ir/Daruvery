@@ -3,10 +3,8 @@ package com.startup.hezare.startup;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TextInputLayout;
@@ -16,10 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -84,7 +83,7 @@ public class Password_UpdateActivity extends Activity implements AsyncResponse{
                             //this to set delegate/listener drug_header to this class
                             sendPostRequest.delegate = Password_UpdateActivity.this;
 
-                            sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/AndroidChangePassword?OldPassword=" + _password + "&NewPassword=" + _new_password);
+                            sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/AndroidChangePassword?OldPassword=" + _password + "&NewPassword=" + _new_password);
 
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
@@ -188,18 +187,15 @@ public class Password_UpdateActivity extends Activity implements AsyncResponse{
 
         progressDialog = new ProgressDialog(Password_UpdateActivity.this);
 
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
+        current_password_layout.setTypeface(App.BYekan);
+        new_password_layout.setTypeface(App.BYekan);
+        new_confirm_password_layout.setTypeface(App.BYekan);
 
-        current_password_layout.setTypeface(BYekan);
-        new_password_layout.setTypeface(BYekan);
-        new_confirm_password_layout.setTypeface(BYekan);
+        input_current_password.setTypeface(App.BYekan);
+        input_new_password.setTypeface(App.BYekan);
+        input_new_password_confirm.setTypeface(App.BYekan);
 
-        input_current_password.setTypeface(BYekan);
-        input_new_password.setTypeface(BYekan);
-        input_new_password_confirm.setTypeface(BYekan);
-
-        btn_password_update.setTypeface(BHoma);
+        btn_password_update.setTypeface(App.BHoma);
     }
 
     @Override

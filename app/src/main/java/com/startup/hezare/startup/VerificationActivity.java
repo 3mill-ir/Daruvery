@@ -3,16 +3,16 @@ package com.startup.hezare.startup;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -22,15 +22,15 @@ import butterknife.InjectView;
 
 public class VerificationActivity extends Activity implements AsyncResponse {
 
+    private static long back_pressed = 0L;
     SessionManagment sessionManagment;
     SendPostRequest sendPostRequest;
     ProgressDialog progressDialog;
-    private int View_clicked = 0;
     @InjectView(R.id.input_verification_code) EditText input_verification_code;
     @InjectView(R.id.btn_verification) AppCompatButton btn_verification;
     @InjectView(R.id.link_resend_code) TextView link_resend_code;
+    private int View_clicked = 0;
 
-    private static long back_pressed = 0L;
     @Override
     public void onBackPressed()
     {
@@ -85,7 +85,7 @@ public class VerificationActivity extends Activity implements AsyncResponse {
                             sendPostRequest = new SendPostRequest(getApplicationContext());
                             //this to set delegate/listener drug_header to this class
                             sendPostRequest.delegate = VerificationActivity.this;
-                            sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/AndroidAuthorizeClient?Tell="
+                            sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/AndroidAuthorizeClient?Tell="
                                     + sessionManagment.getSignedUpSession().get("phone_sign_up") + "&Password=" + sessionManagment.getSignedUpSession().get("password_sign_up")
                                     + "&RndValue=" + _authorize_code);
                             View_clicked = 1;
@@ -114,7 +114,7 @@ public class VerificationActivity extends Activity implements AsyncResponse {
                     sendPostRequest = new SendPostRequest(getApplicationContext());
                     //this to set delegate/listener drug_header to this class
                     sendPostRequest.delegate = VerificationActivity.this;
-                    sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/GetRandomValue?Tell=" + sessionManagment.getSignedUpSession().get("phone_sign_up")
+                    sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/GetRandomValue?Tell=" + sessionManagment.getSignedUpSession().get("phone_sign_up")
                             + "&Password=" + sessionManagment.getSignedUpSession().get("password_sign_up"));
                     View_clicked = 2;
                 }
@@ -128,14 +128,10 @@ public class VerificationActivity extends Activity implements AsyncResponse {
 
     private void init() {
         TextInputLayout Verification_layout = (TextInputLayout) findViewById(R.id.verification_layout);
-
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
-        Verification_layout.setTypeface(BYekan);
-        input_verification_code.setTypeface(BYekan);
-        btn_verification.setTypeface(BHoma);
-        link_resend_code.setTypeface(BHoma);
+        Verification_layout.setTypeface(App.BYekan);
+        input_verification_code.setTypeface(App.BYekan);
+        btn_verification.setTypeface(App.BHoma);
+        link_resend_code.setTypeface(App.BHoma);
     }
 
     @Override

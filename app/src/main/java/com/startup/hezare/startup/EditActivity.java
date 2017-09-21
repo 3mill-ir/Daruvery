@@ -3,10 +3,8 @@ package com.startup.hezare.startup;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TextInputLayout;
@@ -16,11 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -82,7 +80,7 @@ public class EditActivity extends Activity implements AsyncResponse{
                         //this to set delegate/listener drug_header to this class
                         sendPostRequest.delegate = EditActivity.this;
 
-                        sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/AndroidEditClient?Address="+_address+"&FirstName="+_name+"&LastName="+_family);
+                        sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/AndroidEditClient?Address=" + _address + "&FirstName=" + _name + "&LastName=" + _family);
 
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
@@ -172,20 +170,15 @@ public class EditActivity extends Activity implements AsyncResponse{
     //Initiation layout
     private void Init()
     {
+        name_layout.setTypeface(App.BYekan);
+        family_layout.setTypeface(App.BYekan);
+        address_layout.setTypeface(App.BYekan);
 
+        input_name.setTypeface(App.BYekan);
+        input_family.setTypeface(App.BYekan);
+        input_address.setTypeface(App.BYekan);
 
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
-        name_layout.setTypeface(BYekan);
-        family_layout.setTypeface(BYekan);
-        address_layout.setTypeface(BYekan);
-
-        input_name.setTypeface(BYekan);
-        input_family.setTypeface(BYekan);
-        input_address.setTypeface(BYekan);
-
-        btn_update.setTypeface(BHoma);
+        btn_update.setTypeface(App.BHoma);
     }
 
     @Override

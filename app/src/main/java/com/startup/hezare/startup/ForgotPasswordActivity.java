@@ -2,9 +2,7 @@ package com.startup.hezare.startup;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
@@ -14,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import java.net.URLEncoder;
 
@@ -101,7 +101,7 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponse {
                             sendPostRequest = new SendPostRequest(getApplicationContext());
                             //this to set delegate/listener drug_header to this class
                             sendPostRequest.delegate = ForgotPasswordActivity.this;
-                            sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/ForgottenPassword?Tell=" + _phone_number);
+                            sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/ForgottenPassword?Tell=" + _phone_number);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -120,12 +120,9 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponse {
     private void init() {
         progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
 
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
-        phone_number_layout.setTypeface(BYekan);
-        input_phone_number.setTypeface(BYekan);
-        btn_forgot_password.setTypeface(BHoma);
+        phone_number_layout.setTypeface(App.BYekan);
+        input_phone_number.setTypeface(App.BYekan);
+        btn_forgot_password.setTypeface(App.BHoma);
 
     }
 

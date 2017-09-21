@@ -2,25 +2,16 @@ package com.startup.hezare.startup;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidnetworking.utils.Utils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdate;
@@ -36,13 +26,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,18 +44,21 @@ import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,AsyncResponse {
 
-    private GoogleMap mMap;
-    private String TAG = MapsActivity.class.getSimpleName();
+    private static long back_pressed = 0L;
     SupportMapFragment mapFragment;
     SendPostRequest sendPostRequest;
     SessionManagment sessionManagment;
+    Typeface BYekan;
+    Typeface BHoma;
+    private GoogleMap mMap;
+    private String TAG = MapsActivity.class.getSimpleName();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         sessionManagment.set_splash(false);
     }
-    private static long back_pressed = 0L;
+
     @Override
     public void onBackPressed()
     {
@@ -73,9 +66,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else Toast.makeText(getBaseContext(), "برای خروج از برنامه دوباره فشار دهید", Toast.LENGTH_SHORT).show();
         back_pressed = System.currentTimeMillis();
     }
-
-    Typeface BYekan;
-    Typeface BHoma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sessionManagment=new SessionManagment(getApplicationContext());
         sendPostRequest=new SendPostRequest(getApplicationContext());
         sendPostRequest.delegate=MapsActivity.this;
-        sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidServices/AndroidListStations");
+        sendPostRequest.execute(Utils.Main_URL + "api/AndroidServices/AndroidListStations");
 
            //new GetLocation().execute();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -96,9 +86,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (!isGooglePlayServicesAvailable(this)) {
             Toast.makeText(getApplicationContext(), "تنظیمات GooglePlay Services را بررسی کنید", Toast.LENGTH_LONG).show();
         }
-        BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -242,7 +229,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locations.add(new LatLng(Double.valueOf(Parsing().get(i).get("lat")), Double.valueOf(Parsing().get(i).get("long"))));
         }
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in urmia and move the camera
         for (int i = 0; i < Parsing().size(); i++) {
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(locations.get(i))
@@ -256,7 +243,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         LatLng urmia = new LatLng(37.54023, 45.069767);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("ورزشگاه آزادی"));
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(urmia, 13);
         mMap.moveCamera(update);
 

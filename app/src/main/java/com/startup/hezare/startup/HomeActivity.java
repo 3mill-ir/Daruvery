@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -26,9 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
-//import com.roughike.bottombar.BottomBar;
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +39,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
@@ -52,17 +48,18 @@ import javax.net.ssl.HttpsURLConnection;
 
 import co.ronash.pushe.Pushe;
 
+//import com.roughike.bottombar.BottomBar;
+
 public class HomeActivity extends AppCompatActivity implements AsyncResponse {
+    private static final String TAG = "Home";
+    private static long back_pressed = 0L;
     int TAKE_PHOTO_CODE = 0;
     int SELECT_PICTURE = 3;
-    private static final String TAG = "Home";
     File newfile;
     SendPostRequest sendPostRequest;
     Login login;
     SessionManagment sessionManagment;
-
     String file_path;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,18 +72,15 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
         sessionManagment = new SessionManagment(getApplicationContext());
 
         login = new Login(getApplicationContext());
-        login.execute("http://delivery.3mill.ir/api/AndroidAccount/Login?Tell=" + sessionManagment.getUserDetails().get("phone") + "&Password=" + sessionManagment.getUserDetails().get("password") + "&AndroidId=" + App.getAndroidId());
+        login.execute(Utils.Main_URL + "api/AndroidAccount/Login?Tell=" + sessionManagment.getUserDetails().get("phone") + "&Password=" + sessionManagment.getUserDetails().get("password") + "&AndroidId=" + App.getAndroidId());
 
-
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
 
         Button btn_opencamera = (Button) findViewById(R.id.btn_capture);
         Button btn_gallery = (Button) findViewById(R.id.btn_choose_from_gallery);
         TextView txt_guide = (TextView) findViewById(R.id.txt_guide);
-        btn_gallery.setTypeface(BYekan);
-        btn_opencamera.setTypeface(BYekan);
-        txt_guide.setTypeface(BHoma);
+        btn_gallery.setTypeface(App.BYekan);
+        btn_opencamera.setTypeface(App.BYekan);
+        txt_guide.setTypeface(App.BHoma);
 
         AndroidNetworking.initialize(getApplicationContext());
         AndroidNetworking.enableLogging();
@@ -227,168 +221,6 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
                 }
             }
         });*/
-    }
-
-    public class Login extends AsyncTask<String, Void, String> {
-        Context mContext;
-
-        public Login(Context mContext) {
-
-            this.mContext = mContext;
-        }
-
-        public AsyncResponse delegate = null;
-
-        String Message;
-        String myStatus;
-
-        public String getResult() {
-            return Result;
-        }
-
-        public void setResult(String result) {
-            Result = result;
-        }
-
-        String Result;
-
-        public String getMyStatus() {
-            return myStatus;
-        }
-
-        public void setMyStatus(String myStatus) {
-            this.myStatus = myStatus;
-        }
-
-        public String getMessage() {
-            return Message;
-        }
-
-        public void setMessage(String message) {
-            Message = message;
-        }
-
-        protected void onPreExecute() {
-        }
-
-        protected String doInBackground(String... URL) {
-
-            try {
-
-                java.net.URL url = new URL(URL[0]); // here is your URL path
-
-          /* JSONObject postDataParams = new JSONObject();
-           postDataParams.put("Tell", "09215482877");
-           postDataParams.put("Password", "123456789");
-          postDataParams.put("email", "abc@gmail.com");
-          Log.e("params", postDataParams.toString());*/
-
-
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(15000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("POST");
-
-                conn.setRequestProperty("Cache-Control", "no-cache");
-                conn.setUseCaches(false);
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-
-                /*OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(postDataParams.toString());
-
-                writer.flush();
-                writer.close();
-                os.close();*/
-
-                int responseCode = conn.getResponseCode();
-                //Log.i("MY TAG", " " + responseCode);
-                if (responseCode == HttpsURLConnection.HTTP_OK) {
-                    //Log.i("MY TAG", "Connected!");
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(
-                                    conn.getInputStream()));
-
-                    App.setCookie(conn);
-
-
-                    StringBuffer sb = new StringBuffer("");
-                    String line = "";
-
-
-                    while ((line = in.readLine()) != null) {
-                        sb.append(line);
-                        break;
-                    }
-                    //Log.i("MY tag:", sb.toString());
-                    in.close();
-
-
-                    return sb.toString();
-
-                } else {
-                    return new String("false : " + responseCode);
-
-                }
-            } catch (Exception e) {
-                return new String("Exception: " + e.getMessage());
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            // tmp hash map for single Msg
-            HashMap<String, String> Msg = new HashMap<>();
-            try {
-                Result = result;
-                String MSG = result;
-                //replacing backslash with null and removing first and end quotation marks
-                MSG = MSG.replace("\\", "");
-                MSG = MSG.replaceAll("^\"|\"$", "");
-                Log.i("Message from Server", MSG);
-                JSONObject jsonObj = new JSONObject(MSG);
-
-                // Getting JSON Array node
-                JSONArray array = jsonObj.getJSONArray("Root");
-
-                // looping through All Contacts
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject c = array.getJSONObject(i);
-                    String Key = c.getString("Key");
-                    String Text = c.getString("Text");
-
-                    // adding each child node to HashMap key => value
-                    Msg.put("key", Key);
-                    Msg.put("text", Text);
-
-                    myStatus = Msg.get("key");
-                    Message = Msg.get("text");
-
-                    //Log.i("myStatus:", Msg.get("key"));
-
-                }
-            } catch (final JSONException e) {
-                Log.e("JJ", "Json parsing error: " + e.getMessage());
-
-            }
-            String state = "";
-            state += myStatus;
-
-            if (state.equals("OK")) {
-                sendPostRequest = new SendPostRequest(getApplicationContext());
-                sendPostRequest.delegate = HomeActivity.this;
-                sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/GetSpecifics");
-                Log.i("sign in", "OK");
-
-            } else {
-                Toast.makeText(getApplicationContext(), "ارتباط با سرور قطع می باشد", Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-
     }
 
     private HashMap<String, String> Parsing() {
@@ -540,14 +372,171 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
         }
     }
 
-    private static long back_pressed = 0L;
-
     @Override
     public void onBackPressed()
     {
         if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
         else Toast.makeText(getBaseContext(), "برای خروج از برنامه دوباره فشار دهید", Toast.LENGTH_SHORT).show();
         back_pressed = System.currentTimeMillis();
+    }
+
+    public class Login extends AsyncTask<String, Void, String> {
+        public AsyncResponse delegate = null;
+        Context mContext;
+        String Message;
+        String myStatus;
+        String Result;
+
+        public Login(Context mContext) {
+
+            this.mContext = mContext;
+        }
+
+        public String getResult() {
+            return Result;
+        }
+
+        public void setResult(String result) {
+            Result = result;
+        }
+
+        public String getMyStatus() {
+            return myStatus;
+        }
+
+        public void setMyStatus(String myStatus) {
+            this.myStatus = myStatus;
+        }
+
+        public String getMessage() {
+            return Message;
+        }
+
+        public void setMessage(String message) {
+            Message = message;
+        }
+
+        protected void onPreExecute() {
+        }
+
+        protected String doInBackground(String... URL) {
+
+            try {
+
+                java.net.URL url = new URL(URL[0]); // here is your URL path
+
+          /* JSONObject postDataParams = new JSONObject();
+           postDataParams.put("Tell", "09215482877");
+           postDataParams.put("Password", "123456789");
+          postDataParams.put("email", "abc@gmail.com");
+          Log.e("params", postDataParams.toString());*/
+
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000 /* milliseconds */);
+                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setRequestMethod("POST");
+
+                conn.setRequestProperty("Cache-Control", "no-cache");
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                /*OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(postDataParams.toString());
+
+                writer.flush();
+                writer.close();
+                os.close();*/
+
+                int responseCode = conn.getResponseCode();
+                //Log.i("MY TAG", " " + responseCode);
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+                    //Log.i("MY TAG", "Connected!");
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(
+                                    conn.getInputStream()));
+
+                    App.setCookie(conn);
+
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line = "";
+
+
+                    while ((line = in.readLine()) != null) {
+                        sb.append(line);
+                        break;
+                    }
+                    //Log.i("MY tag:", sb.toString());
+                    in.close();
+
+
+                    return sb.toString();
+
+                } else {
+                    return new String("false : " + responseCode);
+
+                }
+            } catch (Exception e) {
+                return new String("Exception: " + e.getMessage());
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // tmp hash map for single Msg
+            HashMap<String, String> Msg = new HashMap<>();
+            try {
+                Result = result;
+                String MSG = result;
+                //replacing backslash with null and removing first and end quotation marks
+                MSG = MSG.replace("\\", "");
+                MSG = MSG.replaceAll("^\"|\"$", "");
+                Log.i("Message from Server", MSG);
+                JSONObject jsonObj = new JSONObject(MSG);
+
+                // Getting JSON Array node
+                JSONArray array = jsonObj.getJSONArray("Root");
+
+                // looping through All Contacts
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject c = array.getJSONObject(i);
+                    String Key = c.getString("Key");
+                    String Text = c.getString("Text");
+
+                    // adding each child node to HashMap key => value
+                    Msg.put("key", Key);
+                    Msg.put("text", Text);
+
+                    myStatus = Msg.get("key");
+                    Message = Msg.get("text");
+
+                    //Log.i("myStatus:", Msg.get("key"));
+
+                }
+            } catch (final JSONException e) {
+                Log.e("JJ", "Json parsing error: " + e.getMessage());
+
+            }
+            String state = "";
+            state += myStatus;
+
+            if (state.equals("OK")) {
+                sendPostRequest = new SendPostRequest(getApplicationContext());
+                sendPostRequest.delegate = HomeActivity.this;
+                sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/GetSpecifics");
+                Log.i("sign in", "OK");
+
+            } else {
+                Toast.makeText(getApplicationContext(), "ارتباط با سرور قطع می باشد", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+
     }
 
 

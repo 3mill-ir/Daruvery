@@ -3,7 +3,6 @@ package com.startup.hezare.startup;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.startup.hezare.startup.UtilClasses.Utils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -27,10 +28,10 @@ public class Sign_up_Activity extends AppCompatActivity implements AsyncResponse
 
     private static final String TAG = "Sign up Activity";
     private static final int REQUEST_SIGNUP = 0;
+    private static long back_pressed = 0L;
     ProgressDialog progressDialog;
     SendPostRequest sendPostRequest;
     SessionManagment sessionManagment;
-
     @InjectView(R.id.input_name) EditText input_name;
     @InjectView(R.id.input_family) EditText input_family;
     @InjectView(R.id.input_phone_number) EditText input_phone_number;
@@ -43,8 +44,6 @@ public class Sign_up_Activity extends AppCompatActivity implements AsyncResponse
     @InjectView(R.id.name_layout)TextInputLayout name_layout;
     @InjectView(R.id.family_layout)TextInputLayout family_layout;
     @InjectView(R.id.address_layout)TextInputLayout address_layout;
-
-
     String Name;
     String Family;
     String Phone_Number;
@@ -61,7 +60,7 @@ public class Sign_up_Activity extends AppCompatActivity implements AsyncResponse
         }
         sessionManagment.set_splash(false);
     }
-    private static long back_pressed = 0L;
+
     @Override
     public void onBackPressed()
     {
@@ -118,7 +117,7 @@ public class Sign_up_Activity extends AppCompatActivity implements AsyncResponse
                         //this to set delegate/listener drug_header to this class
                         sendPostRequest.delegate = Sign_up_Activity.this;
 
-                        sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/AndroidRegisterClient?Tell="+_phone_number+"&Password="+_password+"&Address="+_address+"&FirstName="+_name+"&LastName="+_family+"&AndroidId="+App.getAndroidId());
+                        sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/AndroidRegisterClient?Tell=" + _phone_number + "&Password=" + _password + "&Address=" + _address + "&FirstName=" + _name + "&LastName=" + _family + "&AndroidId=" + App.getAndroidId());
 
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
@@ -236,22 +235,19 @@ public class Sign_up_Activity extends AppCompatActivity implements AsyncResponse
     //Initiation layout
     private void Init()
     {
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
+        name_layout.setTypeface(App.BYekan);
+        family_layout.setTypeface(App.BYekan);
+        phone_number_layout.setTypeface(App.BYekan);
+        password_layout.setTypeface(App.BYekan);
+        address_layout.setTypeface(App.BYekan);
 
-        name_layout.setTypeface(BYekan);
-        family_layout.setTypeface(BYekan);
-        phone_number_layout.setTypeface(BYekan);
-        password_layout.setTypeface(BYekan);
-        address_layout.setTypeface(BYekan);
+        input_name.setTypeface(App.BYekan);
+        input_family.setTypeface(App.BYekan);
+        input_phone_number.setTypeface(App.BYekan);
+        input_password.setTypeface(App.BYekan);
+        input_address.setTypeface(App.BYekan);
 
-        input_name.setTypeface(BYekan);
-        input_family.setTypeface(BYekan);
-        input_phone_number.setTypeface(BYekan);
-        input_password.setTypeface(BYekan);
-        input_address.setTypeface(BYekan);
-
-        btn_sign_up.setTypeface(BHoma);
-        link_login.setTypeface(BHoma);
+        btn_sign_up.setTypeface(App.BHoma);
+        link_login.setTypeface(App.BHoma);
     }
 }

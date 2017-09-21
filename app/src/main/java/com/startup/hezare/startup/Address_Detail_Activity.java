@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,18 +12,13 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.IdRes;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
-import android.test.mock.MockPackageManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -33,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -57,15 +50,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
-
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import okhttp3.Response;
-
-import static com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable;
 
 public class Address_Detail_Activity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -301,17 +291,13 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
 
 
     private void init() {
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
+        new_address.setTypeface(App.BYekan);
+        btn_send_request.setTypeface(App.BYekan);
 
+        current_location.setTypeface(App.BYekan);
+        new_location.setTypeface(App.BYekan);
 
-        new_address.setTypeface(BYekan);
-        btn_send_request.setTypeface(BYekan);
-
-        current_location.setTypeface(BYekan);
-        new_location.setTypeface(BYekan);
-
-        guide.setTypeface(BYekan);
+        guide.setTypeface(App.BYekan);
 
     }
 
@@ -431,6 +417,17 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
         });
     }
 
+    public boolean isGooglePlayServicesAvailable(Activity activity) {
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
+        if (status != ConnectionResult.SUCCESS) {
+            if (googleApiAvailability.isUserResolvableError(status)) {
+                googleApiAvailability.getErrorDialog(activity, status, 2404).show();
+            }
+            return false;
+        }
+        return true;
+    }
 
     public class SendPostRequestImage extends AsyncTask<String, Void, String> {
 
@@ -449,7 +446,7 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
 
             if (result != null) {
 
-                ANRequest.MultiPartBuilder a = new ANRequest.MultiPartBuilder("http://delivery.3mill.ir/Request/SendRequestToServer");
+                ANRequest.MultiPartBuilder a = new ANRequest.MultiPartBuilder(Utils.Main_URL + "Request/SendRequestToServer");
 
                 App.getCookieImage(a);
 
@@ -524,17 +521,5 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
                         });
             }
         }
-    }
-
-    public boolean isGooglePlayServicesAvailable(Activity activity) {
-        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
-        int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
-        if (status != ConnectionResult.SUCCESS) {
-            if (googleApiAvailability.isUserResolvableError(status)) {
-                googleApiAvailability.getErrorDialog(activity, status, 2404).show();
-            }
-            return false;
-        }
-        return true;
     }
 }

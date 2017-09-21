@@ -1,7 +1,6 @@
 package com.startup.hezare.startup;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +14,6 @@ import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
 
 public class AboutActivity extends AppCompatActivity {
-    Typeface BYekan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +30,13 @@ public class AboutActivity extends AppCompatActivity {
         TextView why_us_title=(TextView)findViewById(R.id.title_why);
         TextView why_us_text=(TextView)findViewById(R.id.text_why);
 
-        BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
-        about_us_title.setTypeface(BHoma);
+        about_us_title.setTypeface(App.BHoma);
         about_us_text.setText(about);
-        about_us_text.setTypeface(BYekan);
+        about_us_text.setTypeface(App.BYekan);
         why_us_text.setText(Why);
 
-        why_us_title.setTypeface(BHoma);
-        why_us_text.setTypeface(BYekan);
+        why_us_title.setTypeface(App.BHoma);
+        why_us_text.setTypeface(App.BYekan);
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);

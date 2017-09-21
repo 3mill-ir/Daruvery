@@ -11,16 +11,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
+import com.startup.hezare.startup.UtilClasses.Utils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+
 import javax.net.ssl.HttpsURLConnection;
+
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class ResponceActivity extends Activity implements AsyncResponse{
@@ -43,7 +49,7 @@ public class ResponceActivity extends Activity implements AsyncResponse{
         sessionManagment=new SessionManagment(getApplicationContext());
 
         login1 = new Login();
-        login1.execute("http://delivery.3mill.ir/api/AndroidAccount/Login?Tell=" + sessionManagment.getUserDetails().get("phone") + "&Password=" + sessionManagment.getUserDetails().get("password") + "&AndroidId=" + App.getAndroidId());
+        login1.execute(Utils.Main_URL + "api/AndroidAccount/Login?Tell=" + sessionManagment.getUserDetails().get("phone") + "&Password=" + sessionManagment.getUserDetails().get("password") + "&AndroidId=" + App.getAndroidId());
 
         sendPostRequest=new SendPostRequest(getApplicationContext());
         sendPostRequest.delegate=ResponceActivity.this;
@@ -60,7 +66,7 @@ public class ResponceActivity extends Activity implements AsyncResponse{
             public void onClick(View v) {
 
                 progressDialog.show();
-                sendPostRequest.execute("http://delivery.3mill.ir/Admin3mill/Request/ClientRejectAcceptRequest?RequestId="+getIntent().getStringExtra("RequestId")+"&Type=Accept");
+                sendPostRequest.execute(Utils.Main_URL + "Admin3mill/Request/ClientRejectAcceptRequest?RequestId=" + getIntent().getStringExtra("RequestId") + "&Type=Accept");
             }
         });
         btn_reject.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +74,7 @@ public class ResponceActivity extends Activity implements AsyncResponse{
             public void onClick(View v) {
 
                 progressDialog.show();
-                sendPostRequest.execute("http://delivery.3mill.ir/Admin3mill/Request/ClientRejectAcceptRequest?RequestId="+getIntent().getStringExtra("RequestId")+"&Type=Reject");
+                sendPostRequest.execute(Utils.Main_URL + "Admin3mill/Request/ClientRejectAcceptRequest?RequestId=" + getIntent().getStringExtra("RequestId") + "&Type=Reject");
 
             }
         });
@@ -128,6 +134,7 @@ public class ResponceActivity extends Activity implements AsyncResponse{
 
         String Message;
         String myStatus;
+        String Result;
 
         public String getResult() {
             return Result;
@@ -136,8 +143,6 @@ public class ResponceActivity extends Activity implements AsyncResponse{
         public void setResult(String result) {
             Result = result;
         }
-
-        String Result;
 
         public String getMyStatus() {
             return myStatus;

@@ -2,11 +2,10 @@ package com.startup.hezare.startup;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import com.startup.hezare.startup.UtilClasses.BottomNavigationViewHelper;
 import com.startup.hezare.startup.UtilClasses.CustomTypefaceSpan;
 import com.startup.hezare.startup.UtilClasses.DividerItemDecoration;
+import com.startup.hezare.startup.UtilClasses.Utils;
 import com.startup.hezare.startup.adapters.CustomListViewAdapter;
 import com.startup.hezare.startup.adapters.MyRecyclerAdapter;
 
@@ -30,20 +30,21 @@ import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity implements AsyncResponse {
 
-    private ListView listView;
-    private CustomListViewAdapter customListViewAdapter;
+    private static long back_pressed = 0L;
     MyRecyclerAdapter myRecyclerAdapter;
-    private RecyclerView recyclerView;
-    private String TAG = ProfileActivity.class.getSimpleName();
     SendPostRequest sendPostRequest;
     SessionManagment sessionManagment;
+    private ListView listView;
+    private CustomListViewAdapter customListViewAdapter;
+    private RecyclerView recyclerView;
+    private String TAG = ProfileActivity.class.getSimpleName();
 
     @Override
     protected void onResume() {
         super.onResume();
         sendPostRequest=new SendPostRequest(getApplicationContext());
         sendPostRequest.delegate=ProfileActivity.this;
-        sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidServices/AndroidListRequests");
+        sendPostRequest.execute(Utils.Main_URL + "api/AndroidServices/AndroidListRequests");
 
     }
 
@@ -61,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements AsyncResponse 
         sessionManagment=new SessionManagment(getApplicationContext());
         sendPostRequest=new SendPostRequest(getApplicationContext());
         sendPostRequest.delegate=ProfileActivity.this;
-        sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidServices/AndroidListRequests");
+        sendPostRequest.execute(Utils.Main_URL + "api/AndroidServices/AndroidListRequests");
         //listView = (ListView) findViewById(R.id.list);
 
 
@@ -125,6 +126,7 @@ public class ProfileActivity extends AppCompatActivity implements AsyncResponse 
         super.onStart();
 
     }
+
     public ArrayList<HashMap<String, String>> Parsing()
     {
         ArrayList<HashMap<String, String>> RequestsList=new ArrayList<>();
@@ -177,6 +179,7 @@ public class ProfileActivity extends AppCompatActivity implements AsyncResponse 
             return RequestsList;
         }
     }
+
     @Override
     public void processFinish() {
         Log.i(TAG,String.valueOf(Parsing().size()));
@@ -194,7 +197,7 @@ public class ProfileActivity extends AppCompatActivity implements AsyncResponse 
         recyclerView.setAdapter(myRecyclerAdapter);
 
     }
-    private static long back_pressed = 0L;
+
     @Override
     public void onBackPressed()
     {

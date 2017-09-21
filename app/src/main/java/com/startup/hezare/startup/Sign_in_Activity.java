@@ -1,43 +1,24 @@
 package com.startup.hezare.startup;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.ProgressDialog;
-import android.app.Service;
-import android.content.ComponentCallbacks2;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.Selection;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.startup.hezare.startup.UtilClasses.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.logging.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -46,7 +27,7 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
 
     private static final String TAG = "Sign in Activity";
     private static final int REQUEST_SIGNUP = 0;
-    private int View_clicked = 0;
+    private static long back_pressed = 0L;
     ProgressDialog progressDialog;
     SessionManagment sessionManagment;
     SendPostRequest sendPostRequest;
@@ -61,7 +42,7 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
     @InjectView(R.id.link_verification)TextView verification_link;
     @InjectView(R.id.phone_number_layout)TextInputLayout phone_number_layout;
     @InjectView(R.id.password_layout)TextInputLayout password_layout;
-
+    private int View_clicked = 0;
 
     @Override
     public void onDestroy() {
@@ -73,7 +54,6 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
         sessionManagment.set_splash(false);
     }
 
-    private static long back_pressed = 0L;
     @Override
     public void onBackPressed()
     {
@@ -137,7 +117,7 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
                         sendPostRequest = new SendPostRequest(getApplicationContext());
                         //this to set delegate/listener drug_header to this class
                         sendPostRequest.delegate = Sign_in_Activity.this;
-                        sendPostRequest.execute("http://delivery.3mill.ir/api/AndroidAccount/Login?Tell=" + _phone_number + "&Password=" + _password+"&AndroidId="+App.getAndroidId());
+                        sendPostRequest.execute(Utils.Main_URL + "api/AndroidAccount/Login?Tell=" + _phone_number + "&Password=" + _password + "&AndroidId=" + App.getAndroidId());
                         Log.i("Android ID:" ,"&AndroidId="+App.getAndroidId());
                         View_clicked = 1;
                     }
@@ -250,19 +230,16 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
 
         progressDialog = new ProgressDialog(Sign_in_Activity.this);
 
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
+        phone_number_layout.setTypeface(App.BYekan);
+        password_layout.setTypeface(App.BYekan);
 
-        phone_number_layout.setTypeface(BYekan);
-        password_layout.setTypeface(BYekan);
+        input_phone_number.setTypeface(App.BYekan);
+        input_password.setTypeface(App.BYekan);
 
-        input_phone_number.setTypeface(BYekan);
-        input_password.setTypeface(BYekan);
-
-        btn_sign_in.setTypeface(BHoma);
-        Password_forgot_link.setTypeface(BHoma);
-        Sign_up_link.setTypeface(BYekan);
-        verification_link.setTypeface(BYekan);
+        btn_sign_in.setTypeface(App.BYekan);
+        Password_forgot_link.setTypeface(App.BYekan);
+        Sign_up_link.setTypeface(App.BYekan);
+        verification_link.setTypeface(App.BYekan);
     }
 
 

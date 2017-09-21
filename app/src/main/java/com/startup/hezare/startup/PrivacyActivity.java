@@ -2,10 +2,8 @@ package com.startup.hezare.startup;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
@@ -27,13 +25,9 @@ public class PrivacyActivity extends Activity {
         TextView privacy_title=(TextView)findViewById(R.id.title_rule);
         TextView privacy_text=(TextView)findViewById(R.id.text_rule);
 
-
-        Typeface BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
-        Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
-        privacy_title.setTypeface(BHoma);
+        privacy_title.setTypeface(App.BHoma);
         privacy_text.setText(rules);
-        privacy_text.setTypeface(BYekan);
+        privacy_text.setTypeface(App.BYekan);
 
 
 
