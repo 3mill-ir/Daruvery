@@ -188,9 +188,6 @@ public class ProfileActivity extends AppCompatActivity implements AsyncResponse 
         recyclerView=(RecyclerView)findViewById(R.id.my_recycler);
         myRecyclerAdapter=new MyRecyclerAdapter(getApplicationContext(),Parsing());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-
-
-
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
         //recyclerView.setItemAnimator(new DefaultItemAnimator());

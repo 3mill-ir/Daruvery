@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -202,8 +203,8 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
                 if (latitude != 0 && longitude != 0) {
 
                     if (current_location.isChecked()) {
-                        progressDialog = new ProgressDialog(Address_Detail_Activity.this, ProgressDialog.STYLE_HORIZONTAL);
-                        progressDialog.setProgressStyle(R.style.AppTheme);
+                        progressDialog = new ProgressDialog(Address_Detail_Activity.this, ProgressDialog.THEME_HOLO_DARK);
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDialog.setCancelable(false);
                         //progressDialog.setIndeterminate(true);
                         progressDialog.setMessage("در حال ارسال...");
@@ -216,8 +217,8 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
 
                     } else if (new_location.isChecked()) {
                         if (!(new_address.getText().toString().isEmpty())) {
-                            progressDialog = new ProgressDialog(Address_Detail_Activity.this, ProgressDialog.STYLE_HORIZONTAL);
-                            progressDialog.setProgressStyle(R.style.AppTheme);
+                            progressDialog = new ProgressDialog(Address_Detail_Activity.this, ProgressDialog.THEME_HOLO_DARK);
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.setCancelable(false);
                             //progressDialog.setIndeterminate(true);
                             progressDialog.setMessage("در حال ارسال...");
@@ -292,7 +293,7 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
 
     private void init() {
         new_address.setTypeface(App.BYekan);
-        btn_send_request.setTypeface(App.BYekan);
+        btn_send_request.setTypeface(App.BHoma);
 
         current_location.setTypeface(App.BYekan);
         new_location.setTypeface(App.BYekan);
@@ -342,7 +343,7 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
                 params.height = height;
                 params.width = width;
 
-                LinearLayout layout2 = (LinearLayout) findViewById(R.id.Address_layout);
+                ScrollView layout2 = (ScrollView) findViewById(R.id.Address_layout);
                 ViewGroup.LayoutParams params2 = layout2.getLayoutParams();
                 params2.height = 0;
                 params2.width = width;
@@ -363,14 +364,14 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
                 builder.setMessage("انتخاب موقعیت به عنوان آدرس جدید؟");
                 builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        LinearLayout layout = (LinearLayout) findViewById(R.id.Address_layout);
+                        ScrollView layout = (ScrollView) findViewById(R.id.Address_layout);
                         ViewGroup.LayoutParams params = layout.getLayoutParams();
-                        params.height = (height * 2) / 3;
+                        params.height = (height * 6) / 10;
                         params.width = width;
 
                         LinearLayout layout2 = (LinearLayout) findViewById(R.id.map_layout);
                         ViewGroup.LayoutParams params2 = layout2.getLayoutParams();
-                        params2.height = (height * 1) / 3;
+                        params2.height = (height * 4) / 10;
                         params2.width = width;
 
                         layout.setLayoutParams(params);
@@ -393,7 +394,7 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
                         params.height = height;
                         params.width = width;
 
-                        LinearLayout layout2 = (LinearLayout) findViewById(R.id.Address_layout);
+                        ScrollView layout2 = (ScrollView) findViewById(R.id.Address_layout);
                         ViewGroup.LayoutParams params2 = layout2.getLayoutParams();
                         params2.height = 0;
                         params2.width = width;

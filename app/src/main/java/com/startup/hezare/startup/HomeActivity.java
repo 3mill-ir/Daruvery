@@ -13,12 +13,12 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,18 +69,19 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
         Pushe.setNotificationOn(this);
 
 
+
         sessionManagment = new SessionManagment(getApplicationContext());
 
         login = new Login(getApplicationContext());
         login.execute(Utils.Main_URL + "api/AndroidAccount/Login?Tell=" + sessionManagment.getUserDetails().get("phone") + "&Password=" + sessionManagment.getUserDetails().get("password") + "&AndroidId=" + App.getAndroidId());
 
 
-        Button btn_opencamera = (Button) findViewById(R.id.btn_capture);
-        Button btn_gallery = (Button) findViewById(R.id.btn_choose_from_gallery);
+        AppCompatButton btn_opencamera = (AppCompatButton) findViewById(R.id.btn_capture);
+        AppCompatButton btn_gallery = (AppCompatButton) findViewById(R.id.btn_choose_from_gallery);
         TextView txt_guide = (TextView) findViewById(R.id.txt_guide);
         btn_gallery.setTypeface(App.BYekan);
         btn_opencamera.setTypeface(App.BYekan);
-        txt_guide.setTypeface(App.BHoma);
+        txt_guide.setTypeface(App.iransans);
 
         AndroidNetworking.initialize(getApplicationContext());
         AndroidNetworking.enableLogging();
@@ -433,8 +434,8 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
 
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(15000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setReadTimeout(60000 /* milliseconds */);
+                conn.setConnectTimeout(60000 /* milliseconds */);
                 conn.setRequestMethod("POST");
 
                 conn.setRequestProperty("Cache-Control", "no-cache");
@@ -477,11 +478,11 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
                     return sb.toString();
 
                 } else {
-                    return new String("false : " + responseCode);
+                    return ("false : " + responseCode);
 
                 }
             } catch (Exception e) {
-                return new String("Exception: " + e.getMessage());
+                return ("Exception: " + e.getMessage());
             }
         }
 

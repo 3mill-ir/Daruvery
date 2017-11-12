@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -48,8 +47,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SupportMapFragment mapFragment;
     SendPostRequest sendPostRequest;
     SessionManagment sessionManagment;
-    Typeface BYekan;
-    Typeface BHoma;
     private GoogleMap mMap;
     private String TAG = MapsActivity.class.getSimpleName();
 
@@ -264,11 +261,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 TextView Phone = (TextView) v.findViewById(R.id.center_Phone);
 
                 Title.setText(title);
-                Title.setTypeface(BHoma);
+                Title.setTypeface(App.BHoma);
                 Address.setText(address);
-                Address.setTypeface(BYekan);
+                Address.setTypeface(App.BYekan);
                 Phone.setText(information);
-                Phone.setTypeface(BYekan);
+                Phone.setTypeface(App.BYekan);
 
                 //constant icon
                 Icon.setImageResource(R.mipmap.mapicon);
@@ -291,11 +288,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 TextView Phone = (TextView) v.findViewById(R.id.center_Phone);
 
                 Title.setText(title);
-                Title.setTypeface(BHoma);
+                Title.setTypeface(App.BHoma);
                 Address.setText(address);
-                Address.setTypeface(BYekan);
+                Address.setTypeface(App.BYekan);
                 Phone.setText(information);
-                Phone.setTypeface(BYekan);
+                Phone.setTypeface(App.BYekan);
 
                 //constant icon
                 Icon.setImageResource(R.mipmap.mapicon);

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_home"
     tools:context="com.startup.hezare.startup.ProfileActivity">
     <LinearLayout
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomBarLayout"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/bottomBarLayout">
+        android:padding="5dp">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="horizontal" />
+            android:scrollbars="vertical" />
 
        <!-- <ListView
             android:id="@+id/list"
@@ -37,8 +39,8 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:itemTextColor="@drawable/btn_nav_selector"
         app:itemIconTint="@drawable/btn_nav_selector"
+        app:itemTextColor="@drawable/btn_nav_selector"
         app:menu="@menu/bottombar_tabs1" />
 
 </LinearLayout>

@@ -69,8 +69,8 @@ public class EditActivity extends Activity implements AsyncResponse{
                         String _family = URLEncoder.encode(Family, "UTF-8");
                         String _address = URLEncoder.encode(Address, "UTF-8");
 
-                        progressDialog = new ProgressDialog(EditActivity.this, ProgressDialog.STYLE_HORIZONTAL);
-                        progressDialog.setProgressStyle(R.style.AppTheme);
+                        progressDialog = new ProgressDialog(EditActivity.this, ProgressDialog.THEME_HOLO_DARK);
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDialog.setCancelable(false);
                         //progressDialog.setIndeterminate(true);
                         progressDialog.setMessage("در حال بررسی...");

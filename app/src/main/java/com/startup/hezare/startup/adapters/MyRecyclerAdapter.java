@@ -1,9 +1,7 @@
 package com.startup.hezare.startup.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 import com.startup.hezare.startup.R;
 
 import java.util.ArrayList;
@@ -34,27 +32,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     private ArrayList<HashMap<String, String>> RequestsList;
     private int lastPosition = -1;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView center_name,date,price,status,response_code;
-        public  ImageView image,Status_ImageView;
-        public  ProgressBar img_progress;
-        public Typeface BYekan;
-
-        public MyViewHolder(View view) {
-            super(view);
-            center_name = (TextView) view.findViewById(R.id.center_name);
-            date = (TextView) view.findViewById(R.id.date);
-            price = (TextView) view.findViewById(R.id.price);
-            status = (TextView) view.findViewById(R.id.status);
-            response_code = (TextView) view.findViewById(R.id.response_code);
-            image = (ImageView) view.findViewById(R.id.thumbnail);
-            Status_ImageView = (ImageView) view.findViewById(R.id.status_icon);
-            img_progress=(ProgressBar)view.findViewById(R.id.image_progressbar);
-            BYekan=Typeface.createFromAsset(mContext.getAssets(), "fonts/BYekan.ttf");
-        }
-    }
-
-
     public MyRecyclerAdapter(Context context, ArrayList<HashMap<String, String>> data) {
         this.RequestsList = data;
         this.mContext=context;
@@ -67,12 +44,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
         return new MyViewHolder(itemView);
     }
+
     @Override
     public int getItemViewType(int position) {
         return position;
     }
+
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         HashMap<String, String> Request;
 
         //Log.i("my tag", " " + position);
@@ -128,12 +107,23 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 .resize(160,160)
                 //.transform(new CropCircleTransformation())
                 .transform(new RoundedCornersTransformation(40,0))
-                .into(new Target() {
+                .into(holder.image, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.img_progress.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.img_progress.setVisibility(View.GONE);
+                        holder.image.setImageResource(R.drawable.corrupted);
+                    }
+                });/*new Target() {
 
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                         holder.image.setImageBitmap(bitmap);
-                        holder.img_progress.setVisibility(View.GONE);
+
                     }
 
                     @Override
@@ -145,10 +135,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                     public void onPrepareLoad(Drawable placeHolderDrawable) {
 
                     }
-                });
+                });*/
         //lastPosition = position;
 
     }
+
     @Override
     public int getItemCount() {
         return RequestsList.size();
@@ -159,4 +150,26 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         super.onViewDetachedFromWindow(holder);
         holder.itemView.clearAnimation();
     }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView center_name, date, price, status, response_code;
+        public ImageView image, Status_ImageView;
+        public ProgressBar img_progress;
+        public Typeface BYekan;
+
+        public MyViewHolder(View view) {
+            super(view);
+            center_name = (TextView) view.findViewById(R.id.center_name);
+            date = (TextView) view.findViewById(R.id.date);
+            price = (TextView) view.findViewById(R.id.price);
+            status = (TextView) view.findViewById(R.id.status);
+            response_code = (TextView) view.findViewById(R.id.response_code);
+            image = (ImageView) view.findViewById(R.id.thumbnail);
+            Status_ImageView = (ImageView) view.findViewById(R.id.status_icon);
+            img_progress = (ProgressBar) view.findViewById(R.id.image_progressbar);
+            BYekan = Typeface.createFromAsset(mContext.getAssets(), "fonts/BYekan.ttf");
+        }
+    }
+
+
 }

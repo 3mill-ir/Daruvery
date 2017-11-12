@@ -98,10 +98,9 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
 
                         btn_sign_in.setEnabled(false);
                         Password_forgot_link.setEnabled(false);
-                        progressDialog = new ProgressDialog(Sign_in_Activity.this, ProgressDialog.STYLE_HORIZONTAL);
-                        progressDialog.setProgressStyle(R.style.AppTheme);
+                        progressDialog = new ProgressDialog(Sign_in_Activity.this, ProgressDialog.THEME_HOLO_DARK);
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDialog.setCancelable(false);
-                        //progressDialog.setIndeterminate(true);
                         progressDialog.setMessage("در حال بررسی...");
                         progressDialog.show();
                        /* new android.os.Handler().postDelayed(
@@ -236,10 +235,10 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
         input_phone_number.setTypeface(App.BYekan);
         input_password.setTypeface(App.BYekan);
 
-        btn_sign_in.setTypeface(App.BYekan);
-        Password_forgot_link.setTypeface(App.BYekan);
-        Sign_up_link.setTypeface(App.BYekan);
-        verification_link.setTypeface(App.BYekan);
+        btn_sign_in.setTypeface(App.BHoma);
+        Password_forgot_link.setTypeface(App.iransans);
+        Sign_up_link.setTypeface(App.iransans);
+        verification_link.setTypeface(App.iransans);
     }
 
 

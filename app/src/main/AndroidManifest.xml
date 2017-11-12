@@ -43,7 +43,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyCpRh6pLoeTYCVQ5skgPthbpOzi9ug-Vto" />
 
         <activity
             android:name=".SplashActivity"
@@ -77,7 +77,9 @@
         <activity
             android:name=".Password_UpdateActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Address_Detail_Activity"
             android:label="@string/title_activity_address__detail_"
@@ -123,8 +125,12 @@
             android:name="co.ronash.pushe.cr"
             android:value="aHR0cDovL2MwMTIzZTIwYTQ3MjQ0NThhN2U3ZmYxZTBiMjk0ZmJkOjBmMDgwYThlMTRiMzRkYjQ5NTg1YTg2MGRmOWRjM2RhQGNhLnB1c2hlLmlyLzEwNjE1" />
 
-        <activity android:name=".ResponceActivity" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ResponceActivity">
+
+        </activity>
+        <activity android:name=".ForgotPasswordActivity">
+
+        </activity>
     </application>
 
 </manifest>

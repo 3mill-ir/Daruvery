@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
+    android:background="@drawable/gradient_home"
     android:isScrollContainer="true"
     tools:context="com.startup.hezare.startup.VerificationActivity">
 
     <android.support.v7.widget.AppCompatImageView
-        app:srcCompat="@null"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        app:srcCompat="@null" />
 
     <android.support.v7.widget.AppCompatImageView
-        app:srcCompat="@drawable/icon"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
-        android:layout_centerHorizontal="true"/>
+        app:srcCompat="@drawable/icon" />
 
 
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,13 +56,13 @@
                         android:id="@+id/input_verification_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="2dp"
                         android:cursorVisible="false"
+                        android:drawablePadding="2dp"
                         android:drawableRight="@drawable/ic_lock_black_24dp"
                         android:hint="کد را اینجا وارد کنید"
+                        android:inputType="textPassword"
                         android:maxLength="12"
-                        android:textColor="#000000"
-                        android:inputType="textPassword" />
+                        android:textColor="#000000" />
                 </android.support.design.widget.TextInputLayout>
 
 
@@ -76,9 +73,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:layout_marginTop="24dp"
+                    android:background="@drawable/laybg"
                     android:padding="12dp"
-                    android:textSize="20sp"
-                    android:text="ثبت کد احراز هویت" />
+                    android:text="ثبت کد احراز هویت"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/link_resend_code"
@@ -87,7 +85,7 @@
                     android:layout_marginBottom="24dp"
                     android:gravity="center"
                     android:text="ارسال مجدد کد احراز هویت"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 

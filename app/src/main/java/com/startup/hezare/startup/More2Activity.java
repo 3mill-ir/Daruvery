@@ -28,13 +28,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class More2Activity extends Activity  {
-    ArrayList<HashMap<String, String>> ItemsList;
     private static final String TAG = "More Activity";
+    private static long back_pressed = 0L;
+    ArrayList<HashMap<String, String>> ItemsList;
     SendPostRequest sendPostRequest;
     TextView nav_full_name;
     SessionManagment sessionManagment;
-    private int Item_clicked = 0;
     AlertDialog dialog;
+    private int Item_clicked = 0;
 
     @Override
     protected void onDestroy() {
@@ -47,7 +48,7 @@ public class More2Activity extends Activity  {
         super.onResume();
         nav_full_name.setText(sessionManagment.getUserDetailsname().get("name") + " " + sessionManagment.getUserDetailsname().get("family"));
     }
-    private static long back_pressed = 0L;
+
     @Override
     public void onBackPressed()
     {

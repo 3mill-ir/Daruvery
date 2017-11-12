@@ -54,7 +54,7 @@ public class ResponceActivity extends Activity implements AsyncResponse{
         sendPostRequest=new SendPostRequest(getApplicationContext());
         sendPostRequest.delegate=ResponceActivity.this;
 
-        price.setText(getIntent().getStringExtra("Price") + "  تومان");
+        price.setText("قیمت پیشنهادی : " + getIntent().getStringExtra("Price") + "  تومان");
         Picasso.with(getApplicationContext()).load(getIntent().getStringExtra("URL")).placeholder(R.drawable.fullimage80)
                 .fit()
                 //.transform(new CropCircleTransformation())
@@ -112,8 +112,8 @@ public class ResponceActivity extends Activity implements AsyncResponse{
         btn_accept=(Button)findViewById(R.id.btn_accept);
         btn_reject=(Button)findViewById(R.id.btn_reject);
 
-        progressDialog = new ProgressDialog(ResponceActivity.this, ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setProgressStyle(R.style.AppTheme);
+        progressDialog = new ProgressDialog(ResponceActivity.this, ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         //progressDialog.setIndeterminate(true);
         progressDialog.setMessage("در حال ارسال درخواست...");

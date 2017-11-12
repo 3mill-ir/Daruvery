@@ -12,11 +12,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.prefs.PreferenceChangeEvent;
 
 public class SplashActivity extends Activity {
     Animation               animation_login_icon;

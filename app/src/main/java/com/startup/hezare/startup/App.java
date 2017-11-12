@@ -25,6 +25,7 @@ public class App extends Application {
     static String android_id ;
     static Typeface BYekan;
     static Typeface BHoma;
+    static Typeface iransans;
     private static Context c;
 
     public static Context getContext() {
@@ -79,6 +80,6 @@ public class App extends Application {
         sessionManagment.set_splash(true);
         BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
         BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
-
+        iransans = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/irsans.ttf");
     }
 }

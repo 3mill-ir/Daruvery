@@ -82,8 +82,8 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponse {
                         try {
                             String _phone_number = URLEncoder.encode(phone_number, "UTF-8");
                             btn_forgot_password.setEnabled(false);
-                            progressDialog = new ProgressDialog(ForgotPasswordActivity.this, ProgressDialog.STYLE_HORIZONTAL);
-                            progressDialog.setProgressStyle(R.style.AppTheme);
+                            progressDialog = new ProgressDialog(ForgotPasswordActivity.this, ProgressDialog.THEME_HOLO_DARK);
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.setCancelable(false);
                             //progressDialog.setIndeterminate(true);
                             progressDialog.setMessage("در حال بررسی...");
@@ -122,7 +122,7 @@ public class ForgotPasswordActivity extends Activity implements AsyncResponse {
 
         phone_number_layout.setTypeface(App.BYekan);
         input_phone_number.setTypeface(App.BYekan);
-        btn_forgot_password.setTypeface(App.BHoma);
+        btn_forgot_password.setTypeface(App.BYekan);
 
     }
 

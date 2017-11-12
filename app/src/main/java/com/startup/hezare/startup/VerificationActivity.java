@@ -75,8 +75,8 @@ public class VerificationActivity extends Activity implements AsyncResponse {
 
                             btn_verification.setEnabled(false);
                             link_resend_code.setEnabled(false);
-                            progressDialog = new ProgressDialog(VerificationActivity.this, ProgressDialog.STYLE_HORIZONTAL);
-                            progressDialog.setProgressStyle(R.style.AppTheme);
+                            progressDialog = new ProgressDialog(VerificationActivity.this, ProgressDialog.THEME_HOLO_DARK);
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.setCancelable(false);
                             //progressDialog.setIndeterminate(true);
                             progressDialog.setMessage("در حال بررسی...");

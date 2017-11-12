@@ -4,25 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
+    android:background="@drawable/gradient_home"
     android:isScrollContainer="true"
     tools:context="com.startup.hezare.startup.ProfileActivity">
 
     <android.support.v7.widget.AppCompatImageView
-        app:srcCompat="@null"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        app:srcCompat="@null" />
 
     <android.support.v7.widget.AppCompatImageView
-        app:srcCompat="@drawable/icon"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
-        android:layout_centerHorizontal="true"/>
+        app:srcCompat="@drawable/icon" />
 
 
 
@@ -56,11 +53,11 @@
 
                 <!--  Name Label -->
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/name_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
-                    android:id="@+id/name_layout"
                     android:layoutDirection="rtl">
 
                     <EditText
@@ -68,12 +65,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false"
-                        android:drawableRight="@drawable/ic_person_black_24dp"
                         android:drawablePadding="2dp"
+                        android:drawableRight="@drawable/ic_person_black_24dp"
                         android:hint="نام"
-                        android:textColor="#000000"
+                        android:inputType="textCapWords|textNoSuggestions"
                         android:maxLength="10"
-                        android:inputType="textCapWords|textNoSuggestions" />
+                        android:textColor="#000000" />
                 </android.support.design.widget.TextInputLayout>
 
                 <!-- phone number Label -->
@@ -93,8 +90,8 @@
                         android:drawablePadding="2dp"
                         android:drawableRight="@drawable/ic_people_black_24dp"
                         android:hint="نام خانوادگی"
-                        android:maxLength="20"
                         android:inputType="textCapWords|textNoSuggestions"
+                        android:maxLength="20"
                         android:textColor="#000000"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -116,9 +113,9 @@
                         android:drawablePadding="2dp"
                         android:drawableRight="@drawable/ic_person_pin_circle_black_24dp"
                         android:hint="آدرس جدید"
-                        android:textColor="#000000"
+                        android:inputType="text|textNoSuggestions"
                         android:maxLength="50"
-                        android:inputType="text|textNoSuggestions" />
+                        android:textColor="#000000" />
                 </android.support.design.widget.TextInputLayout>
 
 
@@ -129,9 +126,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:layout_marginTop="24dp"
-                    android:padding="12dp"
-                    android:textSize="20sp"
-                    android:text="ویرایش مشخصات" />
+                    android:background="@drawable/laybg"
+                    android:text="ویرایش مشخصات"
+                    android:textSize="16sp" />
 
 
             </LinearLayout>
@@ -150,8 +147,8 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:itemTextColor="@drawable/btn_nav_selector"
             app:itemIconTint="@drawable/btn_nav_selector"
+            app:itemTextColor="@drawable/btn_nav_selector"
             app:menu="@menu/bottombar_tabs1" />
     </LinearLayout>
 </RelativeLayout>

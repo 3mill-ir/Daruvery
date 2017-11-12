@@ -24,12 +24,9 @@ public class PrivacyActivity extends Activity {
                 "ما متعهد به حفظ و نگهداری تمامی اطلاعات شخصی شما از قبیل نام، نام خانوادگی، آدرس، تلفن های تماس و حساب شما هستیم. تمامی این اطلاعات به منظور ارسال سفارش و اطلاع رسانی به شما می باشد. از ایمیل شما به منظور ارسال اخبار و Promotion استفاده می شود. در صورت عدم تمایل به دریافت ایمیل می توانید در ایمیل های ارسالی بر روی \"لغو دریافت ایمیل\" کلیکی کنید.\n";
         TextView privacy_title=(TextView)findViewById(R.id.title_rule);
         TextView privacy_text=(TextView)findViewById(R.id.text_rule);
-
         privacy_title.setTypeface(App.BHoma);
         privacy_text.setText(rules);
         privacy_text.setTypeface(App.BYekan);
-
-
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);

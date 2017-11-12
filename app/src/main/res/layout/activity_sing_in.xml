@@ -4,34 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_home"
+    android:isScrollContainer="true"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:isScrollContainer="true"
     tools:context="com.startup.hezare.startup.ProfileActivity"
     tools:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
 
     <android.support.v7.widget.AppCompatImageView
-        app:srcCompat="@null"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        app:srcCompat="@null" />
 
     <android.support.v7.widget.AppCompatImageView
-        app:srcCompat="@drawable/icon"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
-        android:layout_centerHorizontal="true"/>
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/icon" />
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,17 +56,17 @@
                 android:layoutDirection="rtl">
 
                 <EditText
-                    android:textAlignment="viewEnd"
                     android:id="@+id/input_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
+                    android:drawablePadding="2dp"
                     android:drawableStart="@drawable/ic_phone_iphone_black_24dp"
                     android:hint="شماره همراه"
-                    android:drawablePadding="2dp"
-                    android:textColor="#000000"
+                    android:inputType="number"
                     android:maxLength="11"
-                    android:inputType="number"/>
+                    android:textAlignment="viewEnd"
+                    android:textColor="#000000" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Password Label -->
@@ -75,35 +76,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
-                app:passwordToggleEnabled="true"
-                android:layoutDirection="rtl">
+                android:layoutDirection="rtl"
+                app:passwordToggleEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
-                    android:textAlignment="viewEnd"
                     android:id="@+id/input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="2dp"
                     android:cursorVisible="false"
+                    android:drawablePadding="2dp"
                     android:drawableStart="@drawable/ic_lock_black_24dp"
                     android:hint="رمز عبور"
-                    android:maxLength="12"
-                    android:textColor="#000000"
                     android:inputType="textPassword"
-                    />
+                    android:maxLength="12"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#000000" />
             </android.support.design.widget.TextInputLayout>
 
 
             <!-- Sign_in Button -->
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_sign_in"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="24dp"
-                android:padding="12dp"
-                android:textSize="20sp"
-                android:text="ورود به حساب کاربری" />
+                android:background="@drawable/laybg"
+                android:text="ورود به حساب کاربری"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/link_forgot_password"
@@ -112,7 +112,7 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="رمز عبور خود را فراموش کرده اید؟"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/link_sign_up"
@@ -121,7 +121,7 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="حساب کاربری ندارید؟ از این جا ثبت نام کنید"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/link_verification"
@@ -130,7 +130,7 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="ثبت کد احراز هویت"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>

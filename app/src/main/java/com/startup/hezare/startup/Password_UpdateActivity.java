@@ -74,8 +74,8 @@ public class Password_UpdateActivity extends Activity implements AsyncResponse{
                             String _new_password = URLEncoder.encode(new_password, "UTF-8");
 
                             btn_password_update.setEnabled(false);
-                            progressDialog = new ProgressDialog(Password_UpdateActivity.this, ProgressDialog.STYLE_HORIZONTAL);
-                            progressDialog.setProgressStyle(R.style.AppTheme);
+                            progressDialog = new ProgressDialog(Password_UpdateActivity.this, ProgressDialog.THEME_HOLO_DARK);
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.setCancelable(false);
                             //progressDialog.setIndeterminate(true);
                             progressDialog.setMessage("در حال بررسی...");

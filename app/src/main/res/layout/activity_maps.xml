@@ -5,11 +5,9 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_home"
     android:clickable="true"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
+    android:padding="0dp"
     tools:context="com.startup.hezare.startup.MapsActivity">
 
     <LinearLayout
@@ -22,28 +20,28 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.startup.hezare.startup.MapsActivity"
             app:cameraTargetLat="37.54023"
             app:cameraTargetLng="45.069767"
             app:cameraZoom="13"
-            app:uiZoomControls="true" />
+            app:uiZoomControls="true"
+            tools:context="com.startup.hezare.startup.MapsActivity" />
 
     </LinearLayout>
 
 
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:id="@+id/bottomBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:itemTextColor="@drawable/btn_nav_selector"
             app:itemIconTint="@drawable/btn_nav_selector"
+            app:itemTextColor="@drawable/btn_nav_selector"
             app:menu="@menu/bottombar_tabs1" />
     </LinearLayout>
 
