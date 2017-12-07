@@ -3,8 +3,11 @@ package com.startup.hezare.startup;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.ResultReceiver;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,6 +31,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
         sessionManagment=new SessionManagment(getApplicationContext());
         Typeface BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
 
@@ -59,7 +65,7 @@ public class SplashActivity extends Activity {
                         }
                     });
                 }
-            }, 0);//500
+            }, 500);//500
 
             new Handler().postDelayed(new Runnable() {
 
@@ -87,7 +93,7 @@ public class SplashActivity extends Activity {
 
                     finish();
                 }
-            }, 0);//3000
+            }, 3000);//3000
         }
         else
         {
@@ -104,6 +110,33 @@ public class SplashActivity extends Activity {
             finish();
         }
 
+
+    }
+
+    //reciver for downloading apk update
+    private class DownloadReceiver extends ResultReceiver {
+
+        public DownloadReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+            if (resultCode == DownloadService.UPDATE_PROGRESS) {
+                int progress = resultData.getInt("progress");
+                //Log.i("percent",String.valueOf(progress));
+                //mProgressDialog.setProgress(progress);
+                if (progress == 100) {
+                    //mProgressDialog.dismiss();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath() + "/daruvery.apk")), "application/vnd.android.package-archive");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+
+                }
+            }
+        }
     }
 
 }

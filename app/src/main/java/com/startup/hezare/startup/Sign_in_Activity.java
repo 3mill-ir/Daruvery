@@ -2,6 +2,7 @@ package com.startup.hezare.startup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
     String phone_number;
     String password;
 
+
     @InjectView(R.id.input_phone_number) EditText input_phone_number;
     @InjectView(R.id.input_password) EditText input_password;
     @InjectView(R.id.btn_sign_in) AppCompatButton btn_sign_in;
@@ -54,6 +56,7 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
         sessionManagment.set_splash(false);
     }
 
+
     @Override
     public void onBackPressed()
     {
@@ -64,8 +67,27 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in);
+
+
+
+        /*mProgressDialog = new ProgressDialog(Sign_in_Activity.this);
+        mProgressDialog.setMessage("در حال دانلود...");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setCancelable(true);*/
+
+        //mProgressDialog.show();
+        /*Intent intent = new Intent(this, DownloadService.class);
+        intent.putExtra("url", "https://file.digi-kala.com/digikala/Image/Webstore/Banner/1396/9/5/6d2d3519.jpg");
+        intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+        startService(intent);*/
+
+
+
         ButterKnife.inject(this);
 
         init();
@@ -199,6 +221,14 @@ public class Sign_in_Activity extends AppCompatActivity implements AsyncResponse
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
         });
+        Log.i("showDialog", String.valueOf(sessionManagment.showDialog()));
+        if (sessionManagment.showDialog()) {
+            try {
+                new Utils(this).check_Version();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

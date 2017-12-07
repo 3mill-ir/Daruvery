@@ -78,6 +78,7 @@ public class App extends Application {
                 Settings.Secure.ANDROID_ID);
         SessionManagment sessionManagment = new SessionManagment(c);
         sessionManagment.set_splash(true);
+        sessionManagment.set_showdialog(true);
         BYekan = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BYekan.ttf");
         BHoma = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/BHoma.ttf");
         iransans = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/irsans.ttf");

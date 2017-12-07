@@ -43,13 +43,14 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCpRh6pLoeTYCVQ5skgPthbpOzi9ug-Vto" />
+            android:value="AIzaSyDFTsH9Ry3M-ys0jna7XEkXrZDN1E-HB1Q" />
 
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -96,6 +97,7 @@
                 <action android:name="co.ronash.pushe.RECEIVE" />
             </intent-filter>
         </service>
+        <service android:name=".DownloadService" />
 
         <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver">
             <intent-filter>
@@ -125,12 +127,9 @@
             android:name="co.ronash.pushe.cr"
             android:value="aHR0cDovL2MwMTIzZTIwYTQ3MjQ0NThhN2U3ZmYxZTBiMjk0ZmJkOjBmMDgwYThlMTRiMzRkYjQ5NTg1YTg2MGRmOWRjM2RhQGNhLnB1c2hlLmlyLzEwNjE1" />
 
-        <activity android:name=".ResponceActivity">
+        <activity android:name=".ResponceActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
 
-        </activity>
-        <activity android:name=".ForgotPasswordActivity">
-
-        </activity>
     </application>
 
 </manifest>

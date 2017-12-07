@@ -213,7 +213,7 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
                         Detail_Address = sessionManagment.getUserDetailsname().get("address");
                         Log.i("Current Address:", "" + sessionManagment.getUserDetailsname().get("address"));
                         sendPostRequestImage = new SendPostRequestImage();
-                        sendPostRequestImage.execute("http://delivery.3mill.ir/Request/SendRequestToServer");
+                        sendPostRequestImage.execute(Utils.Main_URL + "Request/SendRequestToServer");
 
                     } else if (new_location.isChecked()) {
                         if (!(new_address.getText().toString().isEmpty())) {
@@ -226,7 +226,7 @@ public class Address_Detail_Activity extends FragmentActivity implements OnMapRe
 
                             Detail_Address = new_address.getText().toString();
                             sendPostRequestImage = new SendPostRequestImage();
-                            sendPostRequestImage.execute("http://delivery.3mill.ir/Request/SendRequestToServer");
+                            sendPostRequestImage.execute(Utils.Main_URL + "/Request/SendRequestToServer");
                         } else {
                             new_address.setError("فیلد آدرس خالی است");
                         }

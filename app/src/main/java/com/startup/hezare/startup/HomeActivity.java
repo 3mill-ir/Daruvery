@@ -2,6 +2,7 @@ package com.startup.hezare.startup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -222,6 +223,14 @@ public class HomeActivity extends AppCompatActivity implements AsyncResponse {
                 }
             }
         });*/
+        Log.i("showDialog", String.valueOf(sessionManagment.showDialog()));
+        if (sessionManagment.showDialog()) {
+            try {
+                new Utils(this).check_Version();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private HashMap<String, String> Parsing() {

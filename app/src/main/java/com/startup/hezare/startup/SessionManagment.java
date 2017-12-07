@@ -3,14 +3,30 @@ package com.startup.hezare.startup;
 /**
  * Created by rf on 01/08/2017.
  */
+
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import java.util.HashMap;
 
 public class SessionManagment {
+    // User name (make variable public to access from outside)
+    public static final String KEY_PHONE = "phone";
+    // Email address (make variable public to access from outside)
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_FAMILY = "family";
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_PATH = "path";
+    public static final String KEY_PHONE_SIGNUP = "phone_sign_up";
+    public static final String KEY_PASSWORD_SIGNUP = "password_sign_up";
+    public static final String KEY_LOGGED = "key";
+    public static final String KEY_SHOW_UPDATE_DIALOG = "update_dialog";
+    private static final String PREF_NAME = "Login_Credentials";
+    private static final String PREF_NAME2 = "Sign_up_Credentials";
+    private static final String IS_LOGIN = "IsLoggedIn";
+    private static final String IS_SignedUp = "IsSignedUp";
     // Shared Preferences
     SharedPreferences pref;
     SharedPreferences pref2;
@@ -18,43 +34,10 @@ public class SessionManagment {
     Editor editor;
     // Editor for Shared preferences
     Editor editor2;
-
     // Context
     Context _context;
-
     // Shared pref mode
     int PRIVATE_MODE = 0;
-
-    private static final String PREF_NAME = "Login_Credentials";
-
-    private static final String PREF_NAME2 = "Sign_up_Credentials";
-
-    private static final String IS_LOGIN = "IsLoggedIn";
-
-    private static final String IS_SignedUp = "IsSignedUp";
-
-    // User name (make variable public to access from outside)
-    public static final String KEY_PHONE = "phone";
-
-    // Email address (make variable public to access from outside)
-    public static final String KEY_PASSWORD = "password";
-
-    public static final String KEY_NAME = "name";
-
-    public static final String KEY_FAMILY = "family";
-
-    public static final String KEY_ADDRESS = "address";
-
-    public static final String KEY_PATH = "path";
-
-
-    public static final String KEY_PHONE_SIGNUP = "phone_sign_up";
-
-
-    public static final String KEY_PASSWORD_SIGNUP = "password_sign_up";
-
-
-    public static final String KEY_LOGGED = "key";
     // Constructor
     public SessionManagment(Context context){
         this._context = context;
@@ -252,9 +235,16 @@ public class SessionManagment {
 
     public boolean show_splash()
     {
-
         return pref2.getBoolean("splash_show",true);
     }
 
+    public void set_showdialog(boolean show) {
+        editor2.putBoolean("dialog_show", show);
+        editor2.commit();
 
+    }
+
+    public boolean showDialog() {
+        return pref2.getBoolean("dialog_show", false);
+    }
 }
